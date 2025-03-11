@@ -3336,8 +3336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefabs:
   - {fileID: 811861223661504988, guid: 5c0e4f002b0467145aded286b7d18554, type: 3}
-  - {fileID: 811861223661504988, guid: 5c0e4f002b0467145aded286b7d18554, type: 3}
-  - {fileID: 811861223661504988, guid: 5c0e4f002b0467145aded286b7d18554, type: 3}
+  - {fileID: 811861223661504988, guid: 4b167b05c03fb744e8b9125282efc9af, type: 3}
+  - {fileID: 811861223661504988, guid: 14188ab77f8df9f45ac790458683075e, type: 3}
 --- !u!1 &1358109287
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,6 +4955,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891482040}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1912420229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3309883110027912807, guid: 65551982c66f2644eb01cb7802ceace3, type: 3}
+  m_PrefabInstance: {fileID: 4679472178495753880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2025978247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5284,6 +5295,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5259335996075004127, guid: 65551982c66f2644eb01cb7802ceace3, type: 3}
+      propertyPath: maxValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259335996075004127, guid: 65551982c66f2644eb01cb7802ceace3, type: 3}
+      propertyPath: minValue
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259335996075004127, guid: 65551982c66f2644eb01cb7802ceace3, type: 3}
+      propertyPath: valueCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259335996075004127, guid: 65551982c66f2644eb01cb7802ceace3, type: 3}
+      propertyPath: valueCountText
+      value: 
+      objectReference: {fileID: 1912420229}
     - target: {fileID: 5831591395894196277, guid: 65551982c66f2644eb01cb7802ceace3, type: 3}
       propertyPath: m_Name
       value: AddWarriorGate
@@ -5333,6 +5360,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65551982c66f2644eb01cb7802ceace3, type: 3}
+--- !u!1001 &5093648719745663357
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766873171050847845, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847094878548070082, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
+      propertyPath: m_Name
+      value: UpgradeWarriorGate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e18fbf1c2330aa94dbc7b7411363240c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5346,3 +5430,4 @@ SceneRoots:
   - {fileID: 505748586}
   - {fileID: 386551773}
   - {fileID: 4679472178495753880}
+  - {fileID: 5093648719745663357}

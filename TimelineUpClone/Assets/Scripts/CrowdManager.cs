@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CrowdManager : MonoBehaviour
 {
-    [SerializeField] private List<Transform> soldiers = new List<Transform>(); // Askerleri tutan liste
+    [SerializeField] private List<Soldier> soldiers = new List<Soldier>(); // Askerleri tutan liste
     [SerializeField] private GameObject[] soldierPrefabs = new GameObject[3]; // 3 farklı asker prefabı
     [SerializeField] private Transform crowdMainObj;
     [SerializeField] private Vector3[] soldierLocalPositions = new Vector3[36]; // 3 farklı asker prefabı
@@ -35,13 +35,14 @@ public class CrowdManager : MonoBehaviour
         for (int i = 0; i < spawnCount; i++)
         {
             GameObject newSoldier = Instantiate(soldierPrefabs[soldierLevel - 1], transform.position, Quaternion.identity);
-            soldiers.Add(newSoldier.transform);
+            var soldierInstance = newSoldier.transform.GetComponent<Soldier>();
+            soldiers.Add(soldierInstance);
             newSoldier.transform.parent = crowdMainObj;
         }
 
         for (int i = 0; i < soldiers.Count; i++)
         {
-            soldiers[i].localPosition = soldierLocalPositions[i];
+            soldiers[i].transform.localPosition = soldierLocalPositions[i];
         }
         }
         else  if (spawnCount<0)
@@ -58,9 +59,9 @@ public class CrowdManager : MonoBehaviour
 
             for (int i = 0; i < soldiersToRemove; i++)
             {
-                Transform soldierToRemove = soldiers[soldiers.Count - 1]; // En sondaki askeri al
+                var soldierToRemove = soldiers[soldiers.Count - 1]; // En sondaki askeri al
                 soldiers.RemoveAt(soldiers.Count - 1); // Listeden kaldır
-                Destroy(soldierToRemove.gameObject); // Askeri sahneden yok et
+                DestroySoldier(soldierToRemove); // Askeri sahneden yok et
             }
 
             if (removeCount > soldiersToRemove)
@@ -70,7 +71,7 @@ public class CrowdManager : MonoBehaviour
         }
     }
 
-    private void DestroySoldier(Transform soldier)
+    private void DestroySoldier(Soldier soldier)
     {
         if (soldiers.Contains(soldier))
         {
@@ -79,9 +80,24 @@ public class CrowdManager : MonoBehaviour
         }
     }
 
-    public void Deneme()
+    public void UpgradeWarriors(int addUpgradeLevelValue)
     {
-        SpawnSoldier(5, 1);
+         List<int> tempSoldiers = new List<int>();
+         for (int i = 0; i < soldiers.Count; i++)
+         {
+           var soldierLevel=  soldiers[i].GetSoldierLevel();
+           soldierLevel += addUpgradeLevelValue;
+           soldierLevel = Mathf.Clamp(soldierLevel, 1, 3);
+           tempSoldiers.Add(soldierLevel);
+         }
+         while (soldiers.Count > 0) // Liste tamamen boşalana kadar devam et
+         {
+             DestroySoldier(soldiers[0]); // Her seferinde ilk elemanı siliyoruz
+         }
+         foreach (int soldierLevel in tempSoldiers)
+         {
+             SpawnSoldier(1,soldierLevel);
+         }
     }
     
 }

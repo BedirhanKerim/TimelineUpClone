@@ -8,14 +8,8 @@ public class BulletManager : MonoBehaviour
 
     public void SpawnBullet(Transform spawnPosition, int bulletLevel, int damage,float range)
     {
-        if (bulletLevel < 0 || bulletLevel >= bulletPrefabs.Length)
-        {
-            Debug.LogWarning("Geçersiz bulletLevel: " + bulletLevel);
-            return;
-        }
-
         // Mermiyi oluştur
-        GameObject instance = Instantiate(bulletPrefabs[bulletLevel], spawnPosition.position, Quaternion.identity);
+        GameObject instance = Instantiate(bulletPrefabs[bulletLevel-1], spawnPosition.position, Quaternion.identity);
      var bullet=   instance.GetComponent<Bullet>();
      bullet.SetBullet(damage,range);
     }

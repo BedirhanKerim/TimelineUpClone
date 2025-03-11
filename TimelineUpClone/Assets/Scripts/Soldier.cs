@@ -28,6 +28,11 @@ public class Soldier : MonoBehaviour
     {
         GameManager.Instance.bulletManager.SpawnBullet(spawnLocation,soldierLevel,_damage,_bulletRange);
     }
+
+    public int GetSoldierLevel()
+    {
+        return soldierLevel;
+    }
   private void OnTriggerEnter(Collider other)
   {
       IInteractable interactable = other.GetComponent<IInteractable>();

@@ -1,14 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class AddWarriorGate : GateBase,IInteractable,IDamagable
+public class UpgradeWarriorGate : GateBase,IInteractable,IDamagable
 {
-
-
-
     public void Interact()
     {
         if (_bIsTaken)
@@ -17,8 +12,8 @@ public class AddWarriorGate : GateBase,IInteractable,IDamagable
         }
 
         _bIsTaken = true;
-        Debug.Log("Kapıyla etkileşime geçildi, savaşçı eklendi!");
-        GameManager.Instance.crowdManager.SpawnSoldier(valueCount);
+        Debug.Log("Kapıyla etkileşime geçildi, savaşçı Upgrade!");
+        GameManager.Instance.crowdManager.UpgradeWarriors(valueCount);
         Destroy(this.gameObject);
     }
 
@@ -44,5 +39,4 @@ public class AddWarriorGate : GateBase,IInteractable,IDamagable
 
         }
     }
-    
 }
