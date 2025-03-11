@@ -17,6 +17,7 @@ public class CrowdManager : MonoBehaviour
             soldierLocalPositions[i]= crowdMainObj.GetChild(i).localPosition;
 
         }
+        SpawnSoldier(1, 1);
     }
 
     public void SpawnSoldier(int spawnCount, int soldierLevel = 1)
@@ -27,6 +28,10 @@ public class CrowdManager : MonoBehaviour
             return;
         }
 
+        if (spawnCount>0)
+        {
+            
+       
         for (int i = 0; i < spawnCount; i++)
         {
             GameObject newSoldier = Instantiate(soldierPrefabs[soldierLevel - 1], transform.position, Quaternion.identity);
@@ -37,6 +42,31 @@ public class CrowdManager : MonoBehaviour
         for (int i = 0; i < soldiers.Count; i++)
         {
             soldiers[i].localPosition = soldierLocalPositions[i];
+        }
+        }
+        else  if (spawnCount<0)
+        {
+            int removeCount = Mathf.Abs(spawnCount); // Negatif sayıyı pozitife çevir
+
+            if (soldiers.Count == 0)
+            {
+                Debug.LogWarning("Asker bulunmuyor, silinecek bir şey yok!");
+                return;
+            }
+
+            int soldiersToRemove = Mathf.Min(removeCount, soldiers.Count); // Mevcut asker sayısını aşma
+
+            for (int i = 0; i < soldiersToRemove; i++)
+            {
+                Transform soldierToRemove = soldiers[soldiers.Count - 1]; // En sondaki askeri al
+                soldiers.RemoveAt(soldiers.Count - 1); // Listeden kaldır
+                Destroy(soldierToRemove.gameObject); // Askeri sahneden yok et
+            }
+
+            if (removeCount > soldiersToRemove)
+            {
+                Debug.LogWarning("Tüm askerler silindi, ancak istenen kadar asker bulunamadı.");
+            }
         }
     }
 
