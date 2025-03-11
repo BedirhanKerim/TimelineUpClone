@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
+    private float _defaultBulletFireRate=1;
+
     private float _bulletRange=1;
     private float _bulletFireRate=1;
     private int _damage=1;
@@ -13,6 +15,11 @@ public class Soldier : MonoBehaviour
     [SerializeField] private Transform spawnLocation;
 
     private float _fireTimer = 0f; // Atış zamanlayıcısı
+
+    private void Start()
+    {
+        _bulletFireRate = _defaultBulletFireRate;
+    }
 
     private void Update()
     {
@@ -33,7 +40,23 @@ public class Soldier : MonoBehaviour
     {
         return soldierLevel;
     }
-  private void OnTriggerEnter(Collider other)
+
+    public void UpgradeFireRate(float value)
+    {
+        _bulletFireRate -= _bulletFireRate*value / 100;
+    }
+
+    private void OnEnable()
+    {
+        GameEventManager.Instance.OnFireRateUpgraded += UpgradeFireRate;
+    }
+
+    private void OnDisable()
+    {
+//        GameEventManager.Instance.OnFireRateUpgraded -= UpgradeFireRate;
+    }
+
+    private void OnTriggerEnter(Collider other)
   {
       IInteractable interactable = other.GetComponent<IInteractable>();
     
