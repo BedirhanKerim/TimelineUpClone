@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public interface IDamagable
 {
-    void TakeDamage(float damage);
+    void TakeDamage(int damage);
   //  bool IsAlive();
 
 
