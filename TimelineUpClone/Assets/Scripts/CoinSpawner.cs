@@ -13,10 +13,10 @@ public class CoinSpawner : MonoBehaviour
 
     private void Start()
     {
-       // GameEventManager.Instance.OnCoinSpawn += SendUiCoin;
+        GameEventManager.Instance.OnSpawnedCoin += SendUiCoin;
     }
 
-    public void SendUiCoin(Transform worldPos, Action callback, int coinAmount)
+    public void SendUiCoin(Transform worldPos,int coinAmount, Action callback=null )
     {
         var newUiCoin = Instantiate(_uiCoinPrefab);
         newUiCoin.transform.SetParent(_parentUiCoin);

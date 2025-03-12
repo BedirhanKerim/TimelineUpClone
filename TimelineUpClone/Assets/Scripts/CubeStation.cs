@@ -138,7 +138,6 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
 
         foreach (var cubeData in innerCircleData)
         {
-            //  GameObject cube = Instantiate(cubePrefab, transform);
             var cube = LeanPool.Spawn(cubePrefab).transform;
             cube.transform.parent = transform;
             cube.localPosition = cubeData.Position;
@@ -271,7 +270,8 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
                             {
                                 LeanPool.Despawn(cube);
                             }
-
+                            innerCircleCubes.Clear();
+                            outerCircleCubes.Clear();
                             transform.gameObject.SetActive(false);
                         });
                     });

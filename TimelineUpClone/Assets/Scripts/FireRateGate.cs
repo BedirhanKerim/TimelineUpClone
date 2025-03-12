@@ -14,7 +14,8 @@ public class FireRateGate : GateBase,IInteractable,IDamagable
         _bIsTaken = true;
         Debug.Log("Kapıyla etkileşime geçildi, savaşçı FireRate!");
         GameEventManager.Instance.FireRateUpgrade(valueCount);   
-        transform.gameObject.SetActive(false);
+       // transform.gameObject.SetActive(false);
+        CloseAnimation();
 
         //Destroy(this.gameObject);
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -37,6 +38,16 @@ public class GateBase : MonoBehaviour
             redPlane.SetActive(false);
 
         }
+    }
+
+    protected void CloseAnimation()
+    {
+        transform.DOScale(Vector3.zero, 0.5f) // 0.5 saniyede sıfıra küçül
+            .SetEase(Ease.InBack) // Geriye çekilerek küçülsün
+            .OnComplete(() => 
+            {
+                gameObject.SetActive(false); // Objeyi kapat veya başka bir işlem yap
+            });
     }
     protected void GameRestart()
     {

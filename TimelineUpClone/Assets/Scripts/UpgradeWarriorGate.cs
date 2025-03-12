@@ -12,10 +12,10 @@ public class UpgradeWarriorGate : GateBase,IInteractable,IDamagable
         }
 
         _bIsTaken = true;
-        Debug.Log("Kapıyla etkileşime geçildi, savaşçı Upgrade!");
         GameManager.Instance.crowdManager.UpgradeWarriors(valueCount);
        // Destroy(this.gameObject);
-        transform.gameObject.SetActive(false);
+       // transform.gameObject.SetActive(false);
+        CloseAnimation();
 
     }
 

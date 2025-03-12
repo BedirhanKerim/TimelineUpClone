@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Lean.Pool;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -25,7 +26,11 @@ public class Bullet : MonoBehaviour
 
     private void Destroy()
     {
-        Destroy(this.gameObject);
+       LeanPool.Despawn(gameObject);
+       
+        GameEventManager.Instance.SpawnPopUp(transform.position,_damage);
+        GameEventManager.Instance.SpawnDamageParticle(transform.position);
+        
     }
     private void OnTriggerEnter(Collider other)
     {

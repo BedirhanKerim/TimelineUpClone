@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Lean.Pool;
 using UnityEngine;
 
 public class BulletManager : MonoBehaviour
@@ -8,9 +9,12 @@ public class BulletManager : MonoBehaviour
 
     public void SpawnBullet(Transform spawnPosition, int bulletLevel, int damage,float range)
     {
-        // Mermiyi oluştur
-        GameObject instance = Instantiate(bulletPrefabs[bulletLevel-1], spawnPosition.position, Quaternion.identity);
-     var bullet=   instance.GetComponent<Bullet>();
-     bullet.SetBullet(damage,range);
+        GameObject instance = LeanPool.Spawn(bulletPrefabs[bulletLevel - 1], spawnPosition.position, Quaternion.identity);
+
+        var bullet = instance.GetComponent<Bullet>();
+        if (bullet != null)
+        {
+            bullet.SetBullet(damage, range);
+        }
     }
 }

@@ -14,6 +14,8 @@ public class GameManager : Singleton<GameManager>
  private int _totalCoin=0;
  [SerializeField] private TextMeshProUGUI coinText,cubeBarLevelText,cubeBarLevelText2;
  [SerializeField]private Slider cubeBarSlider;
+ [SerializeField]private ParticleSystem cubeBarSliderParticle;
+
  private float _cubeBarExp;
  private float _cubeLevel=1;
 
@@ -35,6 +37,7 @@ public class GameManager : Singleton<GameManager>
  private void CubeExpEared(float value)
  {
      _cubeBarExp += value;
+     cubeBarSliderParticle.Play();
      if (_cubeBarExp>=50)
      {
          _cubeBarExp -= 50;
