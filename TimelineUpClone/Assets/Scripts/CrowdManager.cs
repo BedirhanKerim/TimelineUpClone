@@ -71,7 +71,7 @@ public class CrowdManager : MonoBehaviour
         }
     }
 
-    private void DestroySoldier(Soldier soldier)
+    public void DestroySoldier(Soldier soldier)
     {
         if (soldiers.Contains(soldier))
         {

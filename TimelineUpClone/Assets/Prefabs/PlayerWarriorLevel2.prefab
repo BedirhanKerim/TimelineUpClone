@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb5d3e11a1632340b286c6b0d4af136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 5
   soldierLevel: 2
   spawnLocation: {fileID: 8373523763686892554}
 --- !u!136 &440285156853009826
@@ -283,9 +284,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7416559868624318373, guid: 413cb045079ae4415b43e55179dcfad2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 413cb045079ae4415b43e55179dcfad2, type: 3}
       propertyPath: m_Name
       value: WarriorModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3620923465199806595, guid: 413cb045079ae4415b43e55179dcfad2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

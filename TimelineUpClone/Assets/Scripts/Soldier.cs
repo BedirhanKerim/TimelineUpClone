@@ -9,7 +9,7 @@ public class Soldier : MonoBehaviour
 
     private float _bulletRange=1;
     private float _bulletFireRate=1;
-    private int _damage=1;
+    [SerializeField]private int _damage=1;
 
     [SerializeField] private int soldierLevel;
     [SerializeField] private Transform spawnLocation;
@@ -62,7 +62,7 @@ public class Soldier : MonoBehaviour
     
       if (interactable != null)
       {
-          interactable.Interact();
+          interactable.Interact(this);
       }
   }
 }

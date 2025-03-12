@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        transform.Rotate(Vector3.right * 500 * Time.deltaTime);
+
         transform.position += Vector3.forward * speed * Time.deltaTime;
     }
     public void SetBullet(int damage,float range)

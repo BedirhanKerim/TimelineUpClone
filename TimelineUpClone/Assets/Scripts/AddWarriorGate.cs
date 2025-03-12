@@ -9,7 +9,7 @@ public class AddWarriorGate : GateBase,IInteractable,IDamagable
 
 
 
-    public void Interact()
+    public void Interact(Soldier soldier=null)
     {
         if (_bIsTaken)
         {

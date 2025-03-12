@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireRateGate : GateBase,IInteractable,IDamagable
 {
-    public void Interact()
+    public void Interact(Soldier soldier=null)
     {
         if (_bIsTaken)
         {
