@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
-    private float _defaultBulletFireRate=1;
+    private float _defaultBulletFireRate=.5f;
 
     private float _bulletRange=1;
     private float _bulletFireRate=1;

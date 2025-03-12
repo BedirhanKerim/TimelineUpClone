@@ -7,6 +7,7 @@ public class GameEventManager : Singleton<GameEventManager>
 {
     public event UnityAction<float> OnFireRateUpgraded;
     public event UnityAction<int> OnCoinEarned;
+    public event UnityAction<float> OnCubeExpEarned;
 
     public void FireRateUpgrade(float value)
     {
@@ -16,5 +17,9 @@ public class GameEventManager : Singleton<GameEventManager>
     public  void CoinEarned(int value)
     {
         OnCoinEarned?.Invoke(value);
+    }
+    public  void CubeExpEarned(float value)
+    {
+        OnCubeExpEarned?.Invoke(value);
     }
 }
