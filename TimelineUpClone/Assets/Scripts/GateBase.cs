@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GateBase : MonoBehaviour
 {
-    [SerializeField] protected int valueCount;
+    [SerializeField] protected int defaultValueCount;
+     protected int valueCount;
     protected bool _bIsTaken = false;
     [SerializeField] protected GameObject redPlane, greenPlane;
     [SerializeField] protected TextMeshProUGUI valueCountText;
@@ -14,7 +15,13 @@ public class GateBase : MonoBehaviour
     
     protected void Start()
     {
-        valueCount = Mathf.Clamp(valueCount, minValue, maxValue);
+        SetGateProperties();
+        GameEventManager.Instance.OnLevelRestart += GameRestart;
+    }
+
+    protected void SetGateProperties()
+    {
+        valueCount = Mathf.Clamp(defaultValueCount, minValue, maxValue);
         if (valueCount<0)
         {
             valueCountText.text = valueCount.ToString();
@@ -30,5 +37,14 @@ public class GateBase : MonoBehaviour
             redPlane.SetActive(false);
 
         }
+    }
+    protected void GameRestart()
+    {
+        valueCount = defaultValueCount;
+        transform.localScale=Vector3.one;
+        transform.gameObject.SetActive(true);
+        _bIsTaken = false;
+
+        SetGateProperties();
     }
 }

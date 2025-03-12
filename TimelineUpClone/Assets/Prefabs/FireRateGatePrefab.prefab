@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe81639ac46fcb849bdefa053abd3d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueCount: 15
+  defaultValueCount: -5
   redPlane: {fileID: 2437684425981620489}
   greenPlane: {fileID: 6667372771448612708}
   valueCountText: {fileID: 7842755222991615447}

@@ -40,6 +40,7 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
     {
         // GenerateCylinder();
         SpawnAllCubes();
+        GameEventManager.Instance.OnLevelRestart += GameRestart;
     }
 
     void SpawnAllCubes()
@@ -276,5 +277,14 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
                     });
             });
        
+    }
+
+    private void GameRestart()
+    {
+        transform.gameObject.SetActive(true);
+        transform.localScale=Vector3.one;
+        SpawnAllCubes();
+        _bIsAlive = true;
+
     }
 }

@@ -48,4 +48,7 @@ public class GameManager : Singleton<GameManager>
      cubeBarSlider.value = _cubeBarExp / 50;
      coinText.text = _totalCoin.ToString();
 
- }}
+ }
+
+
+}

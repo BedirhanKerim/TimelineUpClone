@@ -10,26 +10,41 @@ public class GameEventManager : Singleton<GameEventManager>
     public event UnityAction<float> OnCubeExpEarned;
     public event UnityAction OnLevelFail;
     public event UnityAction OnLevelComplete;
+    public event UnityAction OnLevelStart;
+    public event UnityAction OnLevelRestart;
+
 
     public void FireRateUpgrade(float value)
     {
         OnFireRateUpgraded?.Invoke(value);
     }
 
-    public  void CoinEarned(int value)
+    public void CoinEarned(int value)
     {
         OnCoinEarned?.Invoke(value);
     }
-    public  void CubeExpEarned(float value)
+
+    public void CubeExpEarned(float value)
     {
         OnCubeExpEarned?.Invoke(value);
     }
-    public  void LevelFail( )
+
+    public void LevelFail()
     {
         OnLevelFail?.Invoke();
     }
-    public  void LevelComplete( )
+
+    public void LevelComplete()
     {
-        OnLevelFail?.Invoke();
+        OnLevelComplete?.Invoke();
+    }
+
+    public void LevelStart()
+    {
+        OnLevelStart?.Invoke();
+    }
+    public void LevelRestart()
+    {
+        OnLevelRestart?.Invoke();
     }
 }

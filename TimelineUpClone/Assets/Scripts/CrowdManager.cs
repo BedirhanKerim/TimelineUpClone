@@ -9,9 +9,15 @@ public class CrowdManager : MonoBehaviour
     [SerializeField] private GameObject[] soldierPrefabs = new GameObject[3]; // 3 farklı asker prefabı
     [SerializeField] private Transform crowdMainObj;
     [SerializeField] private Vector3[] soldierLocalPositions = new Vector3[36]; // 3 farklı asker prefabı
-
+    private bool _bIsStarted = false;
     private void Start()
     {
+        GameEventManager.Instance.OnLevelStart += GameStarted;
+        GameEventManager.Instance.OnLevelRestart += GameRestart;
+        GameEventManager.Instance.OnLevelComplete += GameEnd;
+        GameEventManager.Instance.OnLevelFail += GameEnd;
+
+
         for (int i = 0; i < crowdMainObj.childCount; i++)
         {
             soldierLocalPositions[i]= crowdMainObj.GetChild(i).localPosition;
@@ -38,6 +44,10 @@ public class CrowdManager : MonoBehaviour
             var soldierInstance = newSoldier.transform.GetComponent<Soldier>();
             soldiers.Add(soldierInstance);
             newSoldier.transform.parent = crowdMainObj;
+            if (_bIsStarted)
+            {
+                soldierInstance.LevelStart();
+            }
         }
 
         for (int i = 0; i < soldiers.Count; i++)
@@ -63,20 +73,22 @@ public class CrowdManager : MonoBehaviour
                 soldiers.RemoveAt(soldiers.Count - 1); // Listeden kaldır
                 DestroySoldier(soldierToRemove); // Askeri sahneden yok et
             }
+            
 
-            if (removeCount > soldiersToRemove)
-            {
-                Debug.LogWarning("Tüm askerler silindi, ancak istenen kadar asker bulunamadı.");
-            }
         }
     }
 
-    public void DestroySoldier(Soldier soldier)
+    public void DestroySoldier(Soldier soldier,bool isDestroyProcess=false)
     {
         if (soldiers.Contains(soldier))
         {
             soldiers.Remove(soldier);
             Destroy(soldier.gameObject); // Askeri sahneden kaldır
+        }
+        if (soldiers.Count == 0&&isDestroyProcess)
+        {
+            GameEventManager.Instance.LevelFail();
+            Debug.Log("123");
         }
     }
 
@@ -99,5 +111,17 @@ public class CrowdManager : MonoBehaviour
              SpawnSoldier(1,soldierLevel);
          }
     }
-    
+
+    private void GameStarted()
+    {
+        _bIsStarted = true;
+    }
+    private void GameEnd()
+    {
+        _bIsStarted = false;
+    }
+    private void GameRestart()
+    {
+        SpawnSoldier(1, 1);
+    }
 }

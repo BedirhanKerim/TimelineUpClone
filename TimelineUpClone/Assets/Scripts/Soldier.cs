@@ -53,11 +53,17 @@ public class Soldier : MonoBehaviour
     private void OnEnable()
     {
         GameEventManager.Instance.OnFireRateUpgraded += UpgradeFireRate;
+        GameEventManager.Instance.OnLevelStart += LevelStart;
+
     }
 
     private void OnDisable()
     {
-//        GameEventManager.Instance.OnFireRateUpgraded -= UpgradeFireRate;
+        if (GameEventManager.Instance != null)
+        {
+            GameEventManager.Instance.OnFireRateUpgraded -= UpgradeFireRate;
+            GameEventManager.Instance.OnLevelStart -= LevelStart;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,4 +75,10 @@ public class Soldier : MonoBehaviour
           interactable.Interact(this);
       }
   }
+
+    public void LevelStart()
+    {
+        animator.SetBool("IsGameStarted",true);
+    }
+    
 }

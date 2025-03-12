@@ -17,9 +17,10 @@ public class AddWarriorGate : GateBase,IInteractable,IDamagable
         }
 
         _bIsTaken = true;
-        Debug.Log("Kapıyla etkileşime geçildi, savaşçı eklendi!");
+//        Debug.Log("Kapıyla etkileşime geçildi, savaşçı eklendi!");
         GameManager.Instance.crowdManager.SpawnSoldier(valueCount);
-        Destroy(this.gameObject);
+       // Destroy(this.gameObject);
+       transform.gameObject.SetActive(false);
     }
 
     public void TakeDamage(int damage)
