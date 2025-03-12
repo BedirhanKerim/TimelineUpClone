@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
-    private float _defaultBulletFireRate=.5f;
+    private float _defaultBulletFireRate=1f;
 
     private float _bulletRange=1;
     private float _bulletFireRate=1;
@@ -13,23 +13,26 @@ public class Soldier : MonoBehaviour
 
     [SerializeField] private int soldierLevel;
     [SerializeField] private Transform spawnLocation;
-
+    [SerializeField] private AttackAnimHandler attackAnimHandler;
+    [SerializeField] private Animator animator;
     private float _fireTimer = 0f; // Atış zamanlayıcısı
 
     private void Start()
     {
         _bulletFireRate = _defaultBulletFireRate;
+        attackAnimHandler.Attack += FireBullet;
+
     }
 
     private void Update()
     {
-        _fireTimer += Time.deltaTime; // Geçen zamanı artır
+     /*   _fireTimer += Time.deltaTime; // Geçen zamanı artır
 
         if (_fireTimer >= _bulletFireRate) // Fire rate süresi dolduysa
         {
             FireBullet();
             _fireTimer = 0f; // Zamanlayıcıyı sıfırla
-        }
+        }*/
     }
     private void FireBullet()
     {
@@ -43,7 +46,8 @@ public class Soldier : MonoBehaviour
 
     public void UpgradeFireRate(float value)
     {
-        _bulletFireRate -= _bulletFireRate*value / 100;
+        _bulletFireRate += 0.01f*value;
+        animator.SetFloat("ThrowSpeed", _bulletFireRate);        
     }
 
     private void OnEnable()
