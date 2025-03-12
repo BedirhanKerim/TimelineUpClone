@@ -9,8 +9,7 @@ using UnityEngine.UI;
 public class GameManager : Singleton<GameManager>
 {
  public CrowdManager crowdManager;
- public BulletManager bulletManager;
- public CoinSpawner coinSpawner;
+ 
  private int _totalCoin=0;
  [SerializeField] private TextMeshProUGUI coinText,cubeBarLevelText,cubeBarLevelText2;
  [SerializeField]private Slider cubeBarSlider;

@@ -12,7 +12,8 @@ public class UpgradeWarriorGate : GateBase,IInteractable,IDamagable
         }
 
         _bIsTaken = true;
-        GameManager.Instance.crowdManager.UpgradeWarriors(valueCount);
+       // GameManager.Instance.crowdManager.UpgradeWarriors(valueCount);
+        GameEventManager.Instance.UpgradeWarriors(valueCount);
        // Destroy(this.gameObject);
        // transform.gameObject.SetActive(false);
         CloseAnimation();

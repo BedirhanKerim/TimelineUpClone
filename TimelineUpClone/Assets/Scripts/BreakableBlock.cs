@@ -52,7 +52,8 @@ public class BreakableBlock : MonoBehaviour,IDamagable,IInteractable
 
     public void Interact(Soldier soldier)
     {
-        GameManager.Instance.crowdManager.DestroySoldier(soldier,true);
+      //  GameManager.Instance.crowdManager.DestroySoldier(soldier,true);
+        GameEventManager.Instance.DestroyWarriors(soldier,true);
     }
 
     private void Restart()

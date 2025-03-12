@@ -36,7 +36,8 @@ public class Soldier : MonoBehaviour
     }
     private void FireBullet()
     {
-        GameManager.Instance.bulletManager.SpawnBullet(spawnLocation,soldierLevel,_damage,_bulletRange);
+       // GameManager.Instance.bulletManager.SpawnBullet(spawnLocation,soldierLevel,_damage,_bulletRange);
+        GameEventManager.Instance.SpawnBullet(spawnLocation,soldierLevel,_damage,_bulletRange);
     }
 
     public int GetSoldierLevel()

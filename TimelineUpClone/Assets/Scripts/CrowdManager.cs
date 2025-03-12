@@ -16,7 +16,9 @@ public class CrowdManager : MonoBehaviour
         GameEventManager.Instance.OnLevelRestart += GameRestart;
         GameEventManager.Instance.OnLevelComplete += GameEnd;
         GameEventManager.Instance.OnLevelFail += GameEnd;
-
+        GameEventManager.Instance.OnUpgradeWarriors += UpgradeWarriors;
+        GameEventManager.Instance.OnDestroyWarriors += DestroySoldier;
+        GameEventManager.Instance.OnSpawnWarriors += SpawnSoldier;
 
         for (int i = 0; i < crowdMainObj.childCount; i++)
         {
