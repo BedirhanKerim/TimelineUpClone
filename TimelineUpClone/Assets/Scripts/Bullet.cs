@@ -28,8 +28,7 @@ public class Bullet : MonoBehaviour
     {
        LeanPool.Despawn(gameObject);
        
-        GameEventManager.Instance.SpawnPopUp(transform.position,_damage);
-        GameEventManager.Instance.SpawnDamageParticle(transform.position);
+        
         
     }
     private void OnTriggerEnter(Collider other)
@@ -42,7 +41,8 @@ public class Bullet : MonoBehaviour
             damagable.TakeDamage(_damage);
             CancelInvoke(nameof(Destroy));
             Destroy();
-
+            GameEventManager.Instance.SpawnPopUp(transform.position,_damage);
+            GameEventManager.Instance.SpawnDamageParticle(transform.position);
 
         }
     }

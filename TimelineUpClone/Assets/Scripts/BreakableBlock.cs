@@ -11,6 +11,8 @@ public class BreakableBlock : MonoBehaviour,IDamagable,IInteractable
     private int _currentHp;
     [SerializeField] private TextMeshProUGUI hpText;
     private bool _bIsAlive=true;
+    private bool _bIsBouncing = false;
+
     private void Start()
     {
         _currentHp = maxHp;
@@ -24,6 +26,8 @@ public class BreakableBlock : MonoBehaviour,IDamagable,IInteractable
         {
             return;
         }
+
+        TakeDamageEffect();
         _currentHp -= damage;
         if (_currentHp<=0)
         {
@@ -37,6 +41,7 @@ public class BreakableBlock : MonoBehaviour,IDamagable,IInteractable
 
     private void Destroy()
     {
+        transform.DOKill();
         //Destroy(this.gameObject);
         transform.DOScale(Vector3.zero, 0.5f) // 0.5 saniyede sıfıra küçül
             .SetEase(Ease.InBack) // Geriye çekilerek küçülsün
@@ -49,7 +54,22 @@ public class BreakableBlock : MonoBehaviour,IDamagable,IInteractable
             GameEventManager.Instance.CoinSpawned(transform, 1, null);
         }
     }
+    public void TakeDamageEffect()
+    {
+        if (_bIsBouncing)
+        {
+            return;
+        }
 
+        _bIsBouncing = true;
+        transform.DOScale(2.5f, 0.1f) // Obje hafif büyüsün
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                transform.DOScale(2f, 0.1f) // Eski haline dönsün
+                    .SetEase(Ease.InQuad).OnComplete(() => { _bIsBouncing = false; });
+            });
+    }
     public void Interact(Soldier soldier)
     {
       //  GameManager.Instance.crowdManager.DestroySoldier(soldier,true);

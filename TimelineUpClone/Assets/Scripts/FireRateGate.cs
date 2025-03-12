@@ -21,7 +21,8 @@ public class FireRateGate : GateBase,IInteractable,IDamagable
     }
 
     public void TakeDamage(int damage)
-    {
+    {        TakeDamageEffect();
+
         valueCount ++;
         valueCount = Mathf.Clamp(valueCount, minValue, maxValue);
         if (valueCount<0)

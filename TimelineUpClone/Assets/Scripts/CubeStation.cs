@@ -23,6 +23,7 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
     private bool _bIsAlive = true;
     private bool _bCanTakeDamage = true;
     [SerializeField] private Transform centerCylinder;
+    private bool _bIsBouncing = false;
 
     [Serializable]
     public class CircleCubeDatas
@@ -184,6 +185,7 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
             return;
         }
 
+        TakeDamageEffect();
         int cubesToRemove = Mathf.Min(damage, outerCircleCubes.Count);
 
         for (int i = 0; i < cubesToRemove; i++)
@@ -251,6 +253,7 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
             return;
         }
 
+        transform.DOKill();
 
         _bIsAlive = false;
         transform.DOScale(1.25f, 0.2f) // 0.2 saniyede 1.25x büyüt
@@ -278,7 +281,22 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
             });
        
     }
+    public void TakeDamageEffect()
+    {
+        if (_bIsBouncing||!_bIsAlive)
+        {
+            return;
+        }
 
+        _bIsBouncing = true;
+        transform.DOScale(1.2f, 0.1f) // Obje hafif büyüsün
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                transform.DOScale(1f, 0.1f) // Eski haline dönsün
+                    .SetEase(Ease.InQuad).OnComplete(() => { _bIsBouncing = false; });
+            });
+    }
     private void GameRestart()
     {
         transform.gameObject.SetActive(true);
