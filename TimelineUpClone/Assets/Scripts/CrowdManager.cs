@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class CrowdManager : MonoBehaviour
@@ -54,7 +55,16 @@ public class CrowdManager : MonoBehaviour
 
         for (int i = 0; i < soldiers.Count; i++)
         {
-            soldiers[i].transform.localPosition = soldierLocalPositions[i];
+            if (i > 34)
+            {
+                soldiers[i].transform.localPosition = soldierLocalPositions[0];
+
+            }
+            else
+            {
+                soldiers[i].transform.localPosition = soldierLocalPositions[i];
+
+            }
         }
         }
         else  if (spawnCount<0)
@@ -123,7 +133,13 @@ public class CrowdManager : MonoBehaviour
         _bIsStarted = false;
     }
     private void GameRestart()
-    {
-        SpawnSoldier(1, 1);
+    { while (soldiers.Count > 0) // Liste tamamen boşalana kadar devam et
+        {
+            DestroySoldier(soldiers[0]); // Her seferinde ilk elemanı siliyoruz
+        }
+        DOVirtual.DelayedCall(.2f, () => 
+        {        SpawnSoldier(1, 1);
+
+        });
     }
 }

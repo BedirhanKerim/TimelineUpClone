@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
  [SerializeField] private TextMeshProUGUI coinText,cubeBarLevelText,cubeBarLevelText2;
  [SerializeField]private Slider cubeBarSlider;
  [SerializeField]private ParticleSystem cubeBarSliderParticle;
-
+ [SerializeField] private float expLimit;
  private float _cubeBarExp;
  private float _cubeLevel=1;
 
@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
      coinText.text = _totalCoin.ToString();
      GameEventManager.Instance.OnCoinEarned += CoinEared;
      GameEventManager.Instance.OnCubeExpEarned += CubeExpEared;
-
+     GameEventManager.Instance.OnLevelRestart += Restart;
  }
 
  private void CoinEared(int value)
@@ -37,9 +37,9 @@ public class GameManager : Singleton<GameManager>
  {
      _cubeBarExp += value;
      cubeBarSliderParticle.Play();
-     if (_cubeBarExp>=50)
+     if (_cubeBarExp>=expLimit)
      {
-         _cubeBarExp -= 50;
+         _cubeBarExp -= expLimit;
          _cubeLevel++;
          var nextLevel = _cubeLevel + 1;
          cubeBarLevelText.text = _cubeLevel.ToString();
@@ -47,10 +47,17 @@ public class GameManager : Singleton<GameManager>
 
      }
 
-     cubeBarSlider.value = _cubeBarExp / 50;
+     cubeBarSlider.value = _cubeBarExp / expLimit;
      coinText.text = _totalCoin.ToString();
 
  }
 
+ private void Restart()
+ {
+     _cubeLevel=1;
+     var nextLevel = _cubeLevel + 1;
+     cubeBarLevelText.text = _cubeLevel.ToString();
+     cubeBarLevelText2.text = nextLevel.ToString();
+ }
 
 }

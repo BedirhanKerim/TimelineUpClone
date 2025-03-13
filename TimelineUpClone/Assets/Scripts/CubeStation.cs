@@ -155,7 +155,7 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
         {
             Transform cube = innerCircleCubes[i];
             Vector3 originalPos = cube.localPosition;
-            Vector3 targetPos = originalPos + new Vector3(0, 2, 0);
+            Vector3 targetPos = originalPos + new Vector3(0, 1, 0);
 
             cube.DOLocalMove(targetPos, .3f)
                 .SetEase(Ease.OutQuad)
@@ -201,7 +201,7 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
                 rb.isKinematic = false;
                 rb.useGravity = true;
 
-                Vector3 randomForce = new Vector3(Random.Range(-1f, 1f), 2.5f, Random.Range(-1f, 1f)) * 3f;
+                Vector3 randomForce = new Vector3(Random.Range(-1f, 1f), 1.5f, Random.Range(-1f, 1f)) * 3f;
                 rb.AddForce(randomForce, ForceMode.Impulse);
             }
 
@@ -228,11 +228,14 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
         col.enabled = false;
         float speed = 25f; 
 
-        while (cube != null && cubeTargetTransform != null)
+        while (cube != null)
         {
             cube.position = Vector3.MoveTowards(cube.position, cubeTargetTransform.position, speed * Time.deltaTime);
-
-            if (Vector3.Distance(cube.position, cubeTargetTransform.position) < 0.1f)
+            // Mesafe oranına göre scale küçültme
+            float distance = Vector3.Distance(cube.position, cubeTargetTransform.position);
+            float scaleFactor = Mathf.Clamp01(distance / 2f); // Mesafeye bağlı olarak 0.1'e küçülecek
+            cube.localScale = Vector3.one * Mathf.Lerp(0.1f, cubeSize, scaleFactor);
+            if (distance < 0.1f)
             {
                 cube.position = cubeTargetTransform.position;
                 break;
