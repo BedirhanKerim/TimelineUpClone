@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
 
  private void Start()
  {
-     //playerpreften alınacak
+     _totalCoin = PlayerPrefs.GetInt("TotalCoin", 0);     //playerpreften alınacak
      coinText.text = _totalCoin.ToString();
      GameEventManager.Instance.OnCoinEarned += CoinEared;
      GameEventManager.Instance.OnCubeExpEarned += CubeExpEared;
@@ -58,6 +58,9 @@ public class GameManager : Singleton<GameManager>
      var nextLevel = _cubeLevel + 1;
      cubeBarLevelText.text = _cubeLevel.ToString();
      cubeBarLevelText2.text = nextLevel.ToString();
+     cubeBarSlider.value = 0;
+     PlayerPrefs.SetInt("TotalCoin", _totalCoin);
+
  }
 
 }

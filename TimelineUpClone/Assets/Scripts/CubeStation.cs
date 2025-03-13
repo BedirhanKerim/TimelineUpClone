@@ -46,31 +46,27 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
 
     void SpawnAllCubes()
     {
-        // Önceden materyalleri belirle
+        ClearCubes();
         var mat1 = materials[Random.Range(2, materials.Length)];
         var mat2 = materials[Random.Range(2, materials.Length)];
 
-        // Dış çember küplerini oluştur
         foreach (var cubeData in outerCircleData)
         {
             SpawnCube(cubeData.Position, cubeData.Rotation, mat1, outerCircleCubes);
         }
 
-        // İç çember küplerini oluştur
         foreach (var cubeData in innerCircleData)
         {
             SpawnCube(cubeData.Position, cubeData.Rotation, mat2, innerCircleCubes);
         }
 
-        // Renk diskini güncelle
         colorDiskRenderer.sharedMaterial = materials[Random.Range(2, materials.Length)];
     }
 
-// Yardımcı fonksiyon: Küp oluşturma işlemini tekrar eden kodları sadeleştirir
     private void SpawnCube(Vector3 position, Quaternion rotation, Material material, List<Transform> list)
     {
         var cube = LeanPool.Spawn(cubePrefab);
-        Transform t = cube.transform; // Transform’u önceden cache’le
+        Transform t = cube.transform;
 
         t.SetParent(transform);
         t.localPosition = position;
@@ -119,7 +115,26 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
         outerCircleCubes.Clear();
         SpawnNewCircleAndReLocate();
     }
+    void ClearCubes()
+    {
+        foreach (var cube in outerCircleCubes)
+        {
+            if (cube != null)
+            {
+                LeanPool.Despawn(cube);
+            }
+        }
+        foreach (var cube in innerCircleCubes)
+        {
+            if (cube != null)
+            {
+                LeanPool.Despawn(cube);
+            }
+        }
+        outerCircleCubes.Clear();
+        innerCircleCubes.Clear();
 
+    }
     public void SpawnNewCircleAndReLocate()
     {
         _bCanTakeDamage = false;
