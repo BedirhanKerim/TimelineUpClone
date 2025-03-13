@@ -131,9 +131,8 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
         innerCircleCubes.Clear();
         for (int i = 0; i < outerCircleCubes.Count; i++)
         {
-            //outerCircleCubes[i].localPosition = outerCircleData[i].Position;
             outerCircleCubes[i].DOLocalMove(outerCircleData[i].Position, .2f)
-                .SetEase(Ease.OutQuad); // 1 saniyede hedef pozisyona yumuşak geçiş
+                .SetEase(Ease.OutQuad); 
             outerCircleCubes[i].localRotation = outerCircleData[i].Rotation;
         }
 
@@ -231,9 +230,8 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
         while (cube != null)
         {
             cube.position = Vector3.MoveTowards(cube.position, cubeTargetTransform.position, speed * Time.deltaTime);
-            // Mesafe oranına göre scale küçültme
             float distance = Vector3.Distance(cube.position, cubeTargetTransform.position);
-            float scaleFactor = Mathf.Clamp01(distance / 2f); // Mesafeye bağlı olarak 0.1'e küçülecek
+            float scaleFactor = Mathf.Clamp01(distance / 2f); 
             cube.localScale = Vector3.one * Mathf.Lerp(0.1f, cubeSize, scaleFactor);
             if (distance < 0.1f)
             {
@@ -259,10 +257,10 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
         transform.DOKill();
 
         _bIsAlive = false;
-        transform.DOScale(1.25f, 0.2f) // 0.2 saniyede 1.25x büyüt
+        transform.DOScale(1.25f, 0.2f) 
             .OnComplete(() =>
             {
-                transform.DOScale(0f, 0.5f) // 0.5 saniyede küçült
+                transform.DOScale(0f, 0.5f) 
                     .OnComplete(() =>
                     {
                         DOVirtual.DelayedCall(3f, () =>
@@ -292,11 +290,11 @@ public class CubeStation : MonoBehaviour, IDamagable, IInteractable
         }
 
         _bIsBouncing = true;
-        transform.DOScale(1.2f, 0.1f) // Obje hafif büyüsün
+        transform.DOScale(1.2f, 0.1f) 
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
-                transform.DOScale(1f, 0.1f) // Eski haline dönsün
+                transform.DOScale(1f, 0.1f) 
                     .SetEase(Ease.InQuad).OnComplete(() => { _bIsBouncing = false; });
             });
     }

@@ -2,44 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireRateGate : GateBase,IInteractable,IDamagable
+public class FireRateGate : GateBase, IInteractable, IDamagable
 {
-    public void Interact(Soldier soldier=null)
+    public void Interact(Soldier soldier = null)
     {
-        if (_bIsTaken)
-        {
-            return;
-        }
+        if (_bIsTaken) return;
 
         _bIsTaken = true;
-        GameEventManager.Instance.FireRateUpgrade(valueCount);   
-       // transform.gameObject.SetActive(false);
+        GameEventManager.Instance.FireRateUpgrade(valueCount);
         CloseAnimation();
-
-        //Destroy(this.gameObject);
     }
 
     public void TakeDamage(int damage)
-    {        TakeDamageEffect();
+    {
+        TakeDamageEffect();
 
-        valueCount ++;
-        valueCount = Mathf.Clamp(valueCount, minValue, maxValue);
-        if (valueCount<0)
+        valueCount = Mathf.Clamp(valueCount + 1, minValue, maxValue);
+        valueCountText.text = (valueCount >= 0) ? $"+{valueCount}" : valueCount.ToString();
+
+        if (valueCount >= 0 && !bIsGreen)
         {
-            
-            valueCountText.text = valueCount.ToString();
-        }
-        else
-        {
-            valueCountText.text = "+" + valueCount;
-            if (!bIsGreen)
-            {
-                greenPlane.SetActive(true);
-                redPlane.SetActive(false);
-
-                bIsGreen = true;
-            }
-
+            greenPlane.SetActive(true);
+            redPlane.SetActive(false);
+            bIsGreen = true;
         }
     }
 }

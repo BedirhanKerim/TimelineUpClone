@@ -25,8 +25,7 @@ public class MovementManager : MonoBehaviour
 
     void Update()
     {
-        // İleri hareket
-        // Oyuncu dokunduğunda/mouse basıldığında
+
         if (Input.GetMouseButtonDown(0))
         {
             lastFrameFingerPositionX = Input.mousePosition.x;
@@ -36,13 +35,13 @@ public class MovementManager : MonoBehaviour
                 GameEventManager.Instance.LevelStart();
             }
         }
-        else if (Input.GetMouseButton(0)) // Parmağı/mouse'u sürüklerken
+        else if (Input.GetMouseButton(0)) 
         {
             float deltaX = Input.mousePosition.x - lastFrameFingerPositionX;
-            moveFactorX = deltaX * 0.01f; // Hassasiyet için ölçekleme
+            moveFactorX = deltaX * 0.01f; 
             lastFrameFingerPositionX = Input.mousePosition.x;
         }
-        else if (Input.GetMouseButtonUp(0)) // Parmağı/mouse'u kaldırınca dur
+        else if (Input.GetMouseButtonUp(0))
         {
             moveFactorX = 0f;
         }
@@ -53,11 +52,9 @@ public class MovementManager : MonoBehaviour
         }
 
         crowdMainObjTransform.position += Vector3.forward * speed * Time.deltaTime;
-        // Swerve hareketi
         float newX = crowdMainObjTransform.transform.position.x + moveFactorX * swerveSpeed;
-        newX = Mathf.Clamp(newX, -maxSwerveAmount, maxSwerveAmount); // Sağ-sol sınırları belirleme
+        newX = Mathf.Clamp(newX, -maxSwerveAmount, maxSwerveAmount); 
 
-        // Yeni pozisyonu uygula
         crowdMainObjTransform.position =
             new Vector3(newX, crowdMainObjTransform.position.y, crowdMainObjTransform.position.z);
     }

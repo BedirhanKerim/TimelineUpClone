@@ -69,7 +69,7 @@ public class CrowdManager : MonoBehaviour
         }
         else  if (spawnCount<0)
         {
-            int removeCount = Mathf.Abs(spawnCount); // Negatif sayıyı pozitife çevir
+            int removeCount = Mathf.Abs(spawnCount); 
 
             if (soldiers.Count == 0)
             {
@@ -77,13 +77,13 @@ public class CrowdManager : MonoBehaviour
                 return;
             }
 
-            int soldiersToRemove = Mathf.Min(removeCount, soldiers.Count); // Mevcut asker sayısını aşma
+            int soldiersToRemove = Mathf.Min(removeCount, soldiers.Count); 
 
             for (int i = 0; i < soldiersToRemove; i++)
             {
-                var soldierToRemove = soldiers[soldiers.Count - 1]; // En sondaki askeri al
-                soldiers.RemoveAt(soldiers.Count - 1); // Listeden kaldır
-                DestroySoldier(soldierToRemove); // Askeri sahneden yok et
+                var soldierToRemove = soldiers[soldiers.Count - 1]; 
+                soldiers.RemoveAt(soldiers.Count - 1); 
+                DestroySoldier(soldierToRemove); 
             }
             
 
@@ -95,7 +95,7 @@ public class CrowdManager : MonoBehaviour
         if (soldiers.Contains(soldier))
         {
             soldiers.Remove(soldier);
-            Destroy(soldier.gameObject); // Askeri sahneden kaldır
+            Destroy(soldier.gameObject); 
         }
         if (soldiers.Count == 0&&isDestroyProcess)
         {
@@ -114,9 +114,9 @@ public class CrowdManager : MonoBehaviour
            soldierLevel = Mathf.Clamp(soldierLevel, 1, 3);
            tempSoldiers.Add(soldierLevel);
          }
-         while (soldiers.Count > 0) // Liste tamamen boşalana kadar devam et
+         while (soldiers.Count > 0) 
          {
-             DestroySoldier(soldiers[0]); // Her seferinde ilk elemanı siliyoruz
+             DestroySoldier(soldiers[0]); 
          }
          foreach (int soldierLevel in tempSoldiers)
          {
@@ -133,9 +133,9 @@ public class CrowdManager : MonoBehaviour
         _bIsStarted = false;
     }
     private void GameRestart()
-    { while (soldiers.Count > 0) // Liste tamamen boşalana kadar devam et
+    { while (soldiers.Count > 0) 
         {
-            DestroySoldier(soldiers[0]); // Her seferinde ilk elemanı siliyoruz
+            DestroySoldier(soldiers[0]); 
         }
         DOVirtual.DelayedCall(.2f, () => 
         {        SpawnSoldier(1, 1);

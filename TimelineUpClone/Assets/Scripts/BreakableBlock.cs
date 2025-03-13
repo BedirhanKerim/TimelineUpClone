@@ -42,12 +42,11 @@ public class BreakableBlock : MonoBehaviour,IDamagable,IInteractable
     private void Destroy()
     {
         transform.DOKill();
-        //Destroy(this.gameObject);
-        transform.DOScale(Vector3.zero, 0.5f) // 0.5 saniyede sıfıra küçül
-            .SetEase(Ease.InBack) // Geriye çekilerek küçülsün
+        transform.DOScale(Vector3.zero, 0.5f) 
+            .SetEase(Ease.InBack)
             .OnComplete(() => 
             {
-                gameObject.SetActive(false); // Objeyi kapat veya başka bir işlem yap
+                gameObject.SetActive(false); 
             });
         for (int i = 0; i < 3; i++)
         {
@@ -62,17 +61,16 @@ public class BreakableBlock : MonoBehaviour,IDamagable,IInteractable
         }
 
         _bIsBouncing = true;
-        transform.DOScale(2.5f, 0.1f) // Obje hafif büyüsün
+        transform.DOScale(2.5f, 0.1f) 
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
-                transform.DOScale(2f, 0.1f) // Eski haline dönsün
+                transform.DOScale(2f, 0.1f) 
                     .SetEase(Ease.InQuad).OnComplete(() => { _bIsBouncing = false; });
             });
     }
     public void Interact(Soldier soldier)
     {
-      //  GameManager.Instance.crowdManager.DestroySoldier(soldier,true);
         GameEventManager.Instance.DestroyWarriors(soldier,true);
     }
 
